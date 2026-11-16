@@ -1,0 +1,148 @@
+{
+  "tournamentName": "Відкритий кубок Прикарпаття 2026",
+  "season": "2026",
+  "organizer": "Федерація футболу Прикарпаття",
+  "isFinished": false,
+  "prizeFund": null,
+  "totalTeams": 4,
+  "totalMatches": 8,
+  "teams": [
+    {
+      "name": "Бескиди",
+      "city": "Львів",
+      "founded": 2012,
+      "stadium": "Арена Бескиди",
+      "colors": ["синій", "білий"],
+      "coach": { "name": "Олександр Гаврилюк", "experienceYears": 9 },
+      "players": [
+        { "number": 1, "name": "Тарас Гнатюк", "position": "GK", "isCaptain": false, "injury": null },
+        { "number": 4, "name": "Олег Мельник", "position": "DF", "isCaptain": false, "injury": null },
+        { "number": 5, "name": "Богдан Кравець", "position": "DF", "isCaptain": false, "injury": "розтягнення зв'язок" },
+        { "number": 8, "name": "Іван Ковальчук", "position": "MF", "isCaptain": true, "injury": null },
+        { "number": 10, "name": "Андрій Петренко", "position": "MF", "isCaptain": false, "injury": null },
+        { "number": 9, "name": "Максим Савчук", "position": "FW", "isCaptain": false, "injury": null },
+        { "number": 11, "name": "Дмитро Бондар", "position": "FW", "isCaptain": false, "injury": null }
+      ]
+    },
+    {
+      "name": "Чорногора",
+      "city": "Івано-Франківськ",
+      "founded": 2009,
+      "stadium": "Стадіон Чорногора",
+      "colors": ["червоний", "чорний"],
+      "coach": { "name": "Степан Васильчук", "experienceYears": 14 },
+      "players": [
+        { "number": 1, "name": "Василь Лисенко", "position": "GK", "isCaptain": false, "injury": null },
+        { "number": 3, "name": "Роман Шевчук", "position": "DF", "isCaptain": false, "injury": null },
+        { "number": 6, "name": "Юрій Козак", "position": "DF", "isCaptain": false, "injury": null },
+        { "number": 7, "name": "Назар Мороз", "position": "MF", "isCaptain": true, "injury": null },
+        { "number": 8, "name": "Сергій Ткачук", "position": "MF", "isCaptain": false, "injury": "травма коліна" },
+        { "number": 9, "name": "Артем Гринів", "position": "FW", "isCaptain": false, "injury": null },
+        { "number": 10, "name": "Ростислав Білик", "position": "FW", "isCaptain": false, "injury": null }
+      ]
+    },
+    {
+      "name": "Свидовець",
+      "city": "Ужгород",
+      "founded": 2015,
+      "stadium": "Арена Свидовець",
+      "colors": ["зелений", "жовтий"],
+      "coach": { "name": "Мирослав Дзюба", "experienceYears": 5 },
+      "players": [
+        { "number": 1, "name": "Микола Данилюк", "position": "GK", "isCaptain": false, "injury": null },
+        { "number": 2, "name": "Едуард Рудий", "position": "DF", "isCaptain": false, "injury": null },
+        { "number": 5, "name": "Павло Яремчук", "position": "DF", "isCaptain": true, "injury": null },
+        { "number": 6, "name": "Орест Фединяк", "position": "MF", "isCaptain": false, "injury": null },
+        { "number": 8, "name": "Володимир Гуменюк", "position": "MF", "isCaptain": false, "injury": null },
+        { "number": 9, "name": "Ігор Стасюк", "position": "FW", "isCaptain": false, "injury": null },
+        { "number": 11, "name": "Захар Попович", "position": "FW", "isCaptain": false, "injury": null }
+      ]
+    },
+    {
+      "name": "Горгани",
+      "city": "Мукачево",
+      "founded": 2018,
+      "stadium": "Стадіон Горгани",
+      "colors": ["білий", "помаранчевий"],
+      "coach": { "name": "Юрій Лукачин", "experienceYears": 7 },
+      "players": [
+        { "number": 1, "name": "Любомир Сидорчук", "position": "GK", "isCaptain": false, "injury": null },
+        { "number": 3, "name": "Святослав Вовк", "position": "DF", "isCaptain": false, "injury": null },
+        { "number": 4, "name": "Олексій Левицький", "position": "DF", "isCaptain": false, "injury": null },
+        { "number": 5, "name": "Кирило Назарук", "position": "MF", "isCaptain": true, "injury": null },
+        { "number": 7, "name": "Денис Романюк", "position": "MF", "isCaptain": false, "injury": null },
+        { "number": 9, "name": "Віталій Клим", "position": "FW", "isCaptain": false, "injury": null },
+        { "number": 10, "name": "Євген Сорока", "position": "FW", "isCaptain": false, "injury": null }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "id": 1, "date": "2026-10-03", "time": "15:00", "round": 1,
+      "homeTeam": "Бескиди", "awayTeam": "Чорногора", "status": "finished",
+      "score": { "home": 2, "away": 1 },
+      "goals": [
+        { "minute": 10, "scorer": "Максим Савчук", "team": "Бескиди", "ownGoal": false },
+        { "minute": 55, "scorer": "Іван Ковальчук", "team": "Бескиди", "ownGoal": false },
+        { "minute": 78, "scorer": "Артем Гринів", "team": "Чорногора", "ownGoal": false }
+      ]
+    },
+    {
+      "id": 2, "date": "2026-10-03", "time": "17:30", "round": 1,
+      "homeTeam": "Свидовець", "awayTeam": "Горгани", "status": "finished",
+      "score": { "home": 0, "away": 0 },
+      "goals": []
+    },
+    {
+      "id": 3, "date": "2026-10-17", "time": "15:00", "round": 2,
+      "homeTeam": "Бескиди", "awayTeam": "Свидовець", "status": "finished",
+      "score": { "home": 3, "away": 1 },
+      "goals": [
+        { "minute": 15, "scorer": "Максим Савчук", "team": "Бескиди", "ownGoal": false },
+        { "minute": 33, "scorer": "Дмитро Бондар", "team": "Бескиди", "ownGoal": false },
+        { "minute": 61, "scorer": "Ігор Стасюк", "team": "Свидовець", "ownGoal": false },
+        { "minute": 80, "scorer": "Максим Савчук", "team": "Бескиди", "ownGoal": false }
+      ]
+    },
+    {
+      "id": 4, "date": "2026-10-17", "time": "17:30", "round": 2,
+      "homeTeam": "Горгани", "awayTeam": "Чорногора", "status": "finished",
+      "score": { "home": 1, "away": 1 },
+      "goals": [
+        { "minute": 40, "scorer": "Віталій Клим", "team": "Горгани", "ownGoal": false },
+        { "minute": 90, "scorer": "Артем Гринів", "team": "Чорногора", "ownGoal": false }
+      ]
+    },
+    {
+      "id": 5, "date": "2026-10-31", "time": "15:00", "round": 3,
+      "homeTeam": "Бескиди", "awayTeam": "Горгани", "status": "finished",
+      "score": { "home": 1, "away": 0 },
+      "goals": [
+        { "minute": 67, "scorer": "Андрій Петренко", "team": "Бескиди", "ownGoal": false }
+      ]
+    },
+    {
+      "id": 6, "date": "2026-10-31", "time": "17:30", "round": 3,
+      "homeTeam": "Чорногора", "awayTeam": "Свидовець", "status": "finished",
+      "score": { "home": 2, "away": 2 },
+      "goals": [
+        { "minute": 12, "scorer": "Ростислав Білик", "team": "Чорногора", "ownGoal": false },
+        { "minute": 30, "scorer": "Ігор Стасюк", "team": "Свидовець", "ownGoal": false },
+        { "minute": 55, "scorer": "Артем Гринів", "team": "Чорногора", "ownGoal": false },
+        { "minute": 85, "scorer": "Юрій Козак", "team": "Чорногора", "ownGoal": true }
+      ]
+    },
+    {
+      "id": 7, "date": "2026-11-22", "time": "15:00", "round": 4,
+      "homeTeam": "Чорногора", "awayTeam": "Бескиди", "status": "scheduled",
+      "score": null,
+      "goals": []
+    },
+    {
+      "id": 8, "date": "2026-11-22", "time": "17:30", "round": 4,
+      "homeTeam": "Горгани", "awayTeam": "Свидовець", "status": "scheduled",
+      "score": null,
+      "goals": []
+    }
+  ]
+}
