@@ -80,16 +80,43 @@ function handleRequest(req, res) {
     return;
   }
 
+  // прапорець: працює лише значення "true"
+  const showVariety = url.searchParams.get('variety') === 'true';
+
+  // число: якщо параметр є, але це не число — помилка 400
+  let minPetalLength = null;
+  if (url.searchParams.has('min_petal_length')) {
+    minPetalLength = toNumber(url.searchParams.get('min_petal_length'));
+    if (minPetalLength === null) {
+      sendJson(res, 400, { error: 'Параметр min_petal_length має бути числом' });
+      return;
+    }
+  }
+
   readData((err, records) => {
     if (err) {
       sendJson(res, 500, { error: err.message });
       return;
     }
 
-    const result = records.map((record) => ({
-      petal_length: toNumber(record['petal.length']),
-      petal_width: toNumber(record['petal.width']),
-    }));
+    const result = [];
+    for (const record of records) {
+      const petalLength = toNumber(record['petal.length']);
+
+      // строге порівняння: petal.length > X; невідома довжина не проходить
+      if (minPetalLength !== null && (petalLength === null || petalLength <= minPetalLength)) {
+        continue;
+      }
+
+      const item = {
+        petal_length: petalLength,
+        petal_width: toNumber(record['petal.width']),
+      };
+      if (showVariety) {
+        item.variety = record.variety ?? null;
+      }
+      result.push(item);
+    }
 
     sendJson(res, 200, result);
   });
