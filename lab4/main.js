@@ -33,9 +33,27 @@ function toNumber(value) {
 }
 
 // Надсилає відповідь клієнту
-function sendJson(res, status, data) {
+function respond(res, status, body) {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
-  res.end(JSON.stringify(data));
+  res.end(body);
+}
+
+// Перетворює дані на JSON, за потреби записує у --output, потім відповідає
+function sendJson(res, status, data) {
+  const body = JSON.stringify(data);
+
+  if (!options.output) {
+    respond(res, status, body);
+    return;
+  }
+
+  fs.writeFile(options.output, body, (err) => {
+    if (err) {
+      respond(res, 500, JSON.stringify({ error: 'Не вдалося записати відповідь у файл' }));
+      return;
+    }
+    respond(res, status, body);
+  });
 }
 
 // Читає файл NDJSON (по одному JSON-об'єкту в рядку).
@@ -73,7 +91,13 @@ function readData(callback) {
 
 // ---------- 3. Обробка запиту ----------
 function handleRequest(req, res) {
-  const url = new URL(req.url, 'http://localhost');
+  let url;
+  try {
+    url = new URL(req.url, 'http://localhost');
+  } catch (urlError) {
+    sendJson(res, 400, { error: 'Некоректна адреса запиту' });
+    return;
+  }
 
   if (url.pathname !== '/') {
     sendJson(res, 404, { error: 'Маршрут не знайдено' });
