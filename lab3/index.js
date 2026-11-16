@@ -154,6 +154,96 @@ program
     printValue(result.value); // null — це значення, а не помилка
   });
 
+// ---------- можливості варіанта 4 ----------
+program
+  .command('roster')
+  .description('показати склад обраної команди')
+  .argument('<team>', 'назва команди, наприклад Бескиди')
+  .addOption(
+    new Option('-p, --position <position>', 'показати лише гравців однієї позиції').choices(Object.keys(POSITIONS)),
+  )
+  .action((teamName, options) => {
+    const team = findTeam(data(), teamName);
+    const players = team.players.filter((p) => !options.position || p.position === options.position);
+    console.log(`Склад команди ${team.name}:`);
+    if (players.length === 0) {
+      console.log('(немає гравців на цій позиції)');
+      return;
+    }
+    for (const p of players) {
+      const captain = p.isCaptain ? ' [капітан]' : '';
+      console.log(`№${String(p.number).padEnd(2)} ${p.name}, ${p.position} (${POSITIONS[p.position]})${captain}`);
+    }
+  });
+
+// Перевіряє формат РРРР-ММ-ДД і те, що така дата існує (наприклад, 2026-02-30 — ні).
+function parseDate(value) {
+  const parsed = new Date(`${value}T00:00:00Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new InvalidArgumentError('потрібна дата у форматі РРРР-ММ-ДД.');
+  }
+  return value;
+}
+
+function formatMatch(m) {
+  const result = m.score === null ? 'ще не зіграно' : `${m.score.home}:${m.score.away}`;
+  return `${m.date} ${m.time} | тур ${m.round} | ${m.homeTeam} — ${m.awayTeam} | ${result}`;
+}
+
+program
+  .command('matches')
+  .description('показати матчі з відбором за командою та/або датою')
+  .option('-t, --team <name>', 'лише матчі цієї команди (вдома або в гостях)')
+  .option('-d, --date <date>', 'лише матчі цього дня (РРРР-ММ-ДД)', parseDate)
+  .option('-g, --goals', 'показати також голи кожного матчу')
+  .action((options) => {
+    const all = data();
+    const teamName = options.team ? findTeam(all, options.team).name : null;
+    const found = all.matches.filter(
+      (m) =>
+        (!teamName || m.homeTeam === teamName || m.awayTeam === teamName) &&
+        (!options.date || m.date === options.date),
+    );
+    if (found.length === 0) {
+      console.log('Матчів за вказаними умовами не знайдено.');
+      return;
+    }
+    for (const m of found) {
+      console.log(formatMatch(m));
+      if (options.goals) {
+        for (const g of m.goals) {
+          console.log(`    ${g.minute}' ${g.scorer} (${g.team})${g.ownGoal ? ' [автогол]' : ''}`);
+        }
+      }
+    }
+  });
+
+program
+  .command('scorers')
+  .description('показати список бомбардирів за кількістю голів')
+  .option('-n, --limit <count>', 'показати не більше вказаної кількості гравців', parsePositiveInt)
+  .action((options) => {
+    const counts = new Map();
+    for (const match of data().matches) {
+      for (const g of match.goals) {
+        if (g.ownGoal) continue; // автоголи не зараховуються нападникові
+        const key = `${g.scorer}|${g.team}`;
+        counts.set(key, (counts.get(key) ?? 0) + 1);
+      }
+    }
+    let table = [...counts].map(([key, goals]) => {
+      const [name, team] = key.split('|');
+      return { name, team, goals };
+    });
+    table.sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name, 'uk'));
+    if (options.limit !== undefined) table = table.slice(0, options.limit);
+    if (table.length === 0) {
+      console.log('Голів ще не забито.');
+      return;
+    }
+    table.forEach((row, i) => console.log(`${i + 1}. ${row.name} (${row.team}) — ${row.goals}`));
+  });
+
 // ---------- запуск і єдина обробка помилок ----------
 try {
   program.parse();
